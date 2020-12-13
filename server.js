@@ -7,9 +7,10 @@ mongoose.connect("mongodb://localhost/blog", {
   useUnifiedTopology: true,
 });
 app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: false }));
 app.use("/articles", articleRouter);
 app.get("/", (req, res) => {
-  const articles1 = [
+  const articles = [
     {
       title: "Test Articles",
       createdAt: new Date(),
@@ -21,7 +22,7 @@ app.get("/", (req, res) => {
       description: "Test Description 2",
     },
   ];
-  res.render("articles/index", { articles: articles1 });
+  res.render("articles/index", { articles: articles });
 });
 
 app.listen(5000);
